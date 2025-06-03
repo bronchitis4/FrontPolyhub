@@ -1,0 +1,61 @@
+
+.teacher-list-item-wrapper {
+    padding: 20px;
+    width: 100%;
+        background-color: #fff;
+        border: 1px solid #ccc;
+}
+
+.teacher-list-item-wrapper h1 {
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.teacher-list-item-description {
+    display: flex;
+    text-align: left;
+}
+
+.teacher-list-item-active-review button {
+    width: 200px;
+    height: 50px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+}
+
+.teacher-list-item-active-review button:active {
+    background-color: #fcf;
+}
+
+.teacher-list-item-info p:first-child {
+    margin: 0px;
+}
+
+
+.teacher-list-item-info {
+    margin-left: 10px;
+
+}
+.teacher-avatar {
+    height: 220px;
+    width: 150px;
+
+            border: 1px solid #ccc;
+}
+.teacher-list-item-active-block {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.teacher-list-item-active-rating {
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+}
+.teacher-list-item-active-rating img {
+    width: 40px;
+    
+}

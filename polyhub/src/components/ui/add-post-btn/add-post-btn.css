@@ -1,0 +1,17 @@
+
+
+
+.add-post-btn {
+    background-color: #007bff;;
+    display: block;
+    height: 50px;
+    width: 150px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding-top: 15px;
+    position: absolute;
+    bottom:30px;
+    right: 30px;
+
+}

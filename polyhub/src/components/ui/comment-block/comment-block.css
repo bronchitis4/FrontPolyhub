@@ -1,0 +1,31 @@
+
+
+.comment-block-wrapper {
+    width: 100%;
+    min-height: 100px;
+    margin: 20px 0;
+    background-color: white;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.comment-block-wrapper > .comment-block-wrapper {
+    margin-top: 30px !important;
+}
+
+.comment-block-wrapper button {
+    border: none;
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+
+.comment-block-wrapper > .comment-form-wrapper {
+    margin-top: 20px;
+}
+.comment-block-content {
+    justify-self: flex-start;
+    text-align: left;
+}

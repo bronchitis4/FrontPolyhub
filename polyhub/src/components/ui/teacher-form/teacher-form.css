@@ -1,0 +1,51 @@
+.form-teacher-wrapper {
+  max-width: 1000px;
+  min-height: 80vh;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.form-teacher-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-teacher-wrapper textarea {
+  resize: none;
+  height: 30vh;
+}
+
+.form-teacher-wrapper input[type="text"],
+.form-teacher-wrapper input[type="email"],
+.form-teacher-wrapper input[type="number"],
+.form-teacher-wrapper textarea,
+.form-teacher-wrapper select,
+.form-teacher-wrapper input[type="file"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-teacher-wrapper textarea {
+  min-height: 100px;
+}
+
+.form-teacher-wrapper label {
+  font-size: 0.9rem;
+  color: #000;
+}
+
+.form-teacher-wrapper button {
+  padding: 0.5rem 1rem;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}

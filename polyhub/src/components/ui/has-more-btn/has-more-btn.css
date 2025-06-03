@@ -1,0 +1,11 @@
+.has-more-btn {
+    color: white;
+    background-color: #007bff;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    font-weight: bold;
+    margin: auto;
+}

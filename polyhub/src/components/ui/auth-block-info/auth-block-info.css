@@ -1,0 +1,13 @@
+.auth-block-info-wrapper { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    border: 2px solid #ccc;
+    padding: 20px;
+    margin:5% auto;
+}
+
+.auth-block-info-wrapper p {
+    font-weight: bold;
+}

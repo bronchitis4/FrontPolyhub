@@ -1,0 +1,23 @@
+
+
+.main-page {
+    width: 100%;
+    display:  flex;
+    justify-content: space-between;
+  }
+  
+  .left-container,  .right-container {
+    width: 15%;
+  }
+
+
+  .center-container {
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
+    scrollbar-width: none;        
+    -ms-overflow-style: none;     
+    width: 70%;
+  }
+  
+
+  

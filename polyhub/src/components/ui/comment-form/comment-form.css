@@ -1,0 +1,35 @@
+
+.comment-form-wrapper {
+    width: 100%;
+    min-height: 100px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.comment-form-wrapper form {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-form-wrapper form textarea:focus {
+    border: none;
+}
+
+.comment-form-wrapper form textarea {
+    resize: none;
+    height: 150px;
+}
+
+.comment-form-wrapper form button {
+    margin-top: 10px;
+    height: 40px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.comment-form-wrapper form button:active {
+    background-color: #fcf ;
+}

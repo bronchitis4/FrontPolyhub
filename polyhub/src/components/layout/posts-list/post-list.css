@@ -1,0 +1,28 @@
+
+.posts-list-wrapper {
+    padding: 20px;
+    overflow-y: auto;
+    width: 100%;
+    height: calc(100vh - 60px);
+}
+
+
+
+  .loading, .error {
+    margin-top: 50px;
+
+  }
+  
+  .posts-list-wrapper::-webkit-scrollbar {
+    display: none;               
+  }
+  
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    row-gap: 20px;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+  }
