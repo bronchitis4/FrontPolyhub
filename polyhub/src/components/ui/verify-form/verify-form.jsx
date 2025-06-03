@@ -24,7 +24,7 @@ const VerifyForm = () => {
         console.log(JSON.stringify(data));
         
         try {
-            const response = await fetch('http://localhost:3000/auth/ver', {
+            const response = await fetch('https://polyhub-server.onrender.com/auth/ver', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
