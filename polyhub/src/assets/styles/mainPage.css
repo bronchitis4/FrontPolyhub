@@ -1,23 +1,58 @@
-
-
 .main-page {
     width: 100%;
-    display:  flex;
+    display: flex;
     justify-content: space-between;
-  }
-  
-  .left-container,  .right-container {
+}
+
+.left-container {
     width: 15%;
-  }
+}
 
-
-  .center-container {
+.center-container {
     height: calc(100vh - 60px);
     overflow-y: scroll;
     scrollbar-width: none;        
     -ms-overflow-style: none;     
     width: 70%;
-  }
-  
+}
 
+.center-container.full-width {
+    width: 85%;
+}
+
+.right-container {
+    width: 15%;
+}
+
+/* Приховуємо sidebar на головній сторінці */
+.landing-page .left-container {
+    display: none;
+}
+
+.landing-page .center-container {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .main-page {
+        display: block;
+        padding: 10px;
+    }
+
+    .left-container {
+        display: none;
+    }
+
+    .center-container,
+    .center-container.full-width {
+        width: 100%;
+    }
+
+    .right-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 100;
+    }
+}
   

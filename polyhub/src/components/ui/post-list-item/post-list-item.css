@@ -54,6 +54,7 @@
     line-height: 1.6;
     color: #4a5568;
     font-size: 1.1rem;
+    word-break: break-word;
 }
 
 .post-list-item-header {
@@ -62,6 +63,42 @@
     align-items: center;
     margin-bottom: 1rem;
     width: 100%;
+}
+
+@media (max-width: 768px) {
+    .post-list-item {
+        padding: 15px;
+    }
+
+    .post-list-item-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .post-list-item-image {
+        max-height: 300px;
+    }
+
+    .post-list-item-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-list-item {
+        padding: 10px;
+    }
+
+    .post-list-item-content h1 {
+        font-size: 1.3rem;
+    }
+
+    .post-list-item-image {
+        max-height: 200px;
+    }
+
+    .post-list-item-text {
+        font-size: 0.95rem;
+    }
 }
 
 

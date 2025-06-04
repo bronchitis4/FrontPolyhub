@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import LogoutBtn from "../../ui/logout-btn/logout-btn";
 import './header.css'
+import { FiUser } from 'react-icons/fi';
 
 const Header = ({search}) => {
     const location = useLocation();
@@ -42,6 +43,7 @@ const Header = ({search}) => {
                         {isAuthenticated ? (
                             <div className="user-profile">
                                 <button className="profile-button" onClick={handleProfileClick}>
+                                    <FiUser className="profile-icon" />
                                     Профіль
                                 </button>
                                 {showProfileMenu && (

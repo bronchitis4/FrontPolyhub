@@ -1,54 +1,56 @@
 import './post-list.css';
 import PostListItem from '../../ui/post-list-item/post-list-item.jsx';
 import PostService from '../../../services/postService.js';
-import { useEffect, useState } from 'react';
-import HasMoreBtn from '../../ui/has-more-btn/has-more-btn.jsx';
+import { useEffect, useState, useRef } from 'react';
+import { FiCalendar, FiArrowUp } from 'react-icons/fi';
 
 const PostList = ({ category_id }) => {
     const postService = new PostService();
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [hasMore, setHasMore] = useState(true);
-    const [offset, setOffset] = useState(0);
-    const LIMIT = 2;
+    const [sortOrder, setSortOrder] = useState('desc'); // 'desc' - найновіші, 'asc' - найстаріші
+    const postsListRef = useRef(null);
 
-    const handleFetchPosts = async () => {
-        if (!hasMore)
-            return;
+    const sortPosts = (postsToSort) => {
+        return [...postsToSort].sort((a, b) => {
+            const dateA = new Date(a.created_at);
+            const dateB = new Date(b.created_at);
+            return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+        });
+    };
 
-        try {
-            const response = await postService.getAllPosts(LIMIT, offset, category_id);
+    const toggleSortOrder = () => {
+        const newOrder = sortOrder === 'desc' ? 'asc' : 'desc';
+        setSortOrder(newOrder);
+        setPosts(prevPosts => sortPosts(prevPosts));
+    };
 
-            if (response.data.length < LIMIT)
-                setHasMore(false);
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
 
-            if (!response.data.length)
-                throw Error("Пости закінчились");
-
-            setOffset(state => state + LIMIT);
-            setPosts(state => [...state, ...response.data]);
-        } catch (error) {
-            setHasMore(false);
-        } finally {
-            setLoading(false);
+        // Додатково прокручуємо до верху контейнера постів
+        if (postsListRef.current) {
+            postsListRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
     };
 
     useEffect(() => {
-        setHasMore(true);
-        setOffset(0);
-        const fetchPosts = async () => {
+        setPosts([]); // Очищаємо пости при зміні категорії
+        
+        const fetchAllPosts = async () => {
             try {
                 setLoading(true);
-                const response = await postService.getAllPosts(LIMIT, 0, category_id);
-
-                if (response.data.length < LIMIT)
-                    setHasMore(false);
+                const response = await postService.getAllPosts(1000, 0, category_id); // Отримуємо всі пости одразу
 
                 if (response) {
-                    setPosts(response.data);
-                    setOffset(state => state + LIMIT);
+                    setPosts(sortPosts(response.data));
                 } else {
                     setError('Постів не знайдено');
                     setPosts([]);
@@ -63,36 +65,53 @@ const PostList = ({ category_id }) => {
         };
 
         if (category_id) {
-            fetchPosts();
+            fetchAllPosts();
         }
     }, [category_id]);
 
     return (
-        <div className="posts-list-wrapper">
-            {loading && <div className="loading">Завантаження...</div>}
-            {error && <div className="error">{error}</div>}
-            {!loading && !error && posts.length === 0 && (
-                <div className="no-posts">Постів не знайдено</div>
-            )}
-            {!loading && !error && posts.length > 0 && (
-                <div className="posts-list">
-                    {posts.map((post) => (
-                        <PostListItem
-                            key={post.id}
-                            id={post.id}
-                            header={post.title}
-                            urlImage={post.imageurl}
-                            content={post.content}
-                            date={post.created_at}
-                            user_id={post.user_id}
-                        />
-                    ))}
+        <>
+            <div className="posts-list-wrapper" ref={postsListRef}>
+                <div className="posts-list-header">
+                    <button 
+                        className={`sort-button ${sortOrder === 'desc' ? 'active' : ''}`} 
+                        onClick={toggleSortOrder}
+                        title={sortOrder === 'desc' ? 'Найновіші спочатку' : 'Найстаріші спочатку'}
+                    >
+                        <FiCalendar />
+                        <span>{sortOrder === 'desc' ? 'Найновіші' : 'Найстаріші'}</span>
+                    </button>
                 </div>
-            )}
-            {hasMore && !loading ? (
-                <HasMoreBtn action={handleFetchPosts}>Прогрузити далі</HasMoreBtn>
-            ) : null}
-        </div>
+
+                {loading && <div className="loading">Завантаження...</div>}
+                {error && <div className="error">{error}</div>}
+                {!loading && !error && posts.length === 0 && (
+                    <div className="no-posts">Постів не знайдено</div>
+                )}
+                {!loading && !error && posts.length > 0 && (
+                    <div className="posts-list">
+                        {posts.map((post) => (
+                            <PostListItem
+                                key={post.id}
+                                id={post.id}
+                                header={post.title}
+                                urlImage={post.imageurl}
+                                content={post.content}
+                                date={post.created_at}
+                                user_id={post.user_id}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
+            <button 
+                className="scroll-top-button"
+                onClick={scrollToTop}
+                title="Прокрутити вгору"
+            >
+                <FiArrowUp />
+            </button>
+        </>
     );
 };
 

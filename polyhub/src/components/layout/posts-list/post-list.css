@@ -9,6 +9,51 @@
     margin-right: auto;
 }
 
+.posts-list-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    gap: 12px;
+}
+
+.sort-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: white;
+    color: #4a5568;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sort-button:hover {
+    border-color: #4a90e2;
+    color: #4a90e2;
+    transform: translateY(-1px);
+}
+
+.sort-button.active {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    color: white;
+}
+
+.sort-button svg {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.sort-button:hover svg {
+    transform: rotate(180deg);
+}
+
 .loading, .error {
     margin-top: 20px;
     text-align: center;
@@ -40,9 +85,86 @@
     margin-bottom: 40px;
 }
 
-@media (max-width: 1300px) {
-    .posts-list-wrapper {
-        width: calc(100% - 40px);
-        margin: 80px 20px 0 20px;
+.scroll-top-button {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-top-button:hover {
+    transform: translateY(calc(-50% - 3px));
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+    background-color: #357abd;
+}
+
+.scroll-top-button svg {
+    transition: transform 0.3s ease;
+}
+
+.scroll-top-button:hover svg {
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1400px) {
+    .scroll-top-button {
+        right: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .posts-list-header {
+        padding: 0 5px;
+    }
+
+    .sort-button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+
+    .scroll-top-button {
+        width: 40px;
+        height: 40px;
+        right: 15px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sort-button span {
+        display: none;
+    }
+
+    .sort-button {
+        padding: 8px;
+    }
+
+    .sort-button svg {
+        margin: 0;
     }
 }

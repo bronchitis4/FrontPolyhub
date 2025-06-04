@@ -46,10 +46,10 @@ function App() {
           <Route path='/verification' element={<VerifyForm/>}/>
           <Route path='/login' element={<LoginForm/>}/>
           <Route path='/posts' element= 
-              {<MainPage left={<Sidebar OnSetCategoryId={OnSetCategoryId} OnSetInstituteId={OnSetInstituteId}/>} center={<PostList  category_id={categoryId}/>} rigth={<AddPostBtn/>} />}
+              {<MainPage left={<Sidebar OnSetCategoryId={OnSetCategoryId} OnSetInstituteId={OnSetInstituteId}/>} center={<PostList category_id={categoryId}/>} rigth={<AddPostBtn/>} />}
           />
           <Route path='/teachers' element= 
-              {<MainPage left={<Sidebar OnSetCategoryId={OnSetCategoryId} OnSetInstituteId={OnSetInstituteId}/>} center={<TeacherList  institute_id={instituteId} searchValue={searchTeacherQuery} onSearchChange={handleTeacherSearchChange}/>} rigth={<AddTeacherBtn/>} />}
+              {<MainPage left={<Sidebar OnSetCategoryId={OnSetCategoryId} OnSetInstituteId={OnSetInstituteId}/>} center={<TeacherList institute_id={instituteId} searchValue={searchTeacherQuery} onSearchChange={handleTeacherSearchChange}/>} rigth={<AddTeacherBtn/>} />}
           />
           <Route path='/post/:id' element= 
               {<MainPage left={<Sidebar OnSetCategoryId={OnSetCategoryId} OnSetInstituteId={OnSetInstituteId}/>} center={<PostInfo/>} />}
