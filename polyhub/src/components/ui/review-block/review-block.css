@@ -1,8 +1,13 @@
 .review-block-wrapper {
-    padding: 15px;
+    width: 100%;
+    min-height: 100px;
+    margin: 20px 0;
     background-color: white;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
 }
 
 .review-block-content {
@@ -22,6 +27,7 @@
 .star {
     color: #ddd;
     font-size: 20px;
+    transition: color 0.2s ease;
 }
 
 .star.filled {
@@ -39,28 +45,157 @@
     white-space: pre-wrap;
 }
 
-.review-actions {
+.rating-input {
+    margin-bottom: 15px;
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 0;
 }
 
-.review-actions button {
-    padding: 5px 10px;
-    background-color: transparent;
-    border: 1px solid #0056b3;
-    color: #0056b3;
-    border-radius: 4px;
+.rating-input .star {
     cursor: pointer;
-    font-size: 14px;
 }
 
-.review-actions button:hover {
-    background-color: #e7f1ff;
+.rating-input .star:hover,
+.rating-input .star:hover ~ .star {
+    color: #ffc107;
+}
+
+/* Використовуємо стилі від comment-block */
+.comment-block-wrapper {
+    width: 100%;
+    min-height: 100px;
+    margin: 20px 0;
+    background-color: white;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.comment-block-wrapper > .comment-block-wrapper {
+    margin-top: 30px !important;
+}
+
+.comment-block-wrapper button {
+    border: none;
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+
+.comment-block-wrapper > .comment-form-wrapper {
+    margin-top: 20px;
+}
+
+.comment-block-content {
+    justify-self: flex-start;
+    text-align: left;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.comment-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #f3f4f6;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.comment-btn:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+}
+
+.comment-btn i {
+    font-size: 16px;
 }
 
 .replies-list {
-    margin-left: 30px;
-    border-left: 2px solid #ddd;
-    padding-left: 15px;
+    margin-left: 40px;
+    padding-left: 20px;
+    border-left: 2px solid #e5e7eb;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.comment-form-wrapper {
+    animation: fadeIn 0.3s ease-out;
+    margin-top: 15px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .comment-block-wrapper {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .comment-actions {
+        gap: 8px;
+    }
+
+    .comment-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .replies-list {
+        margin-left: 20px;
+        padding-left: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .comment-block-wrapper {
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .comment-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .comment-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .replies-list {
+        margin-left: 10px;
+        padding-left: 10px;
+    }
 } 

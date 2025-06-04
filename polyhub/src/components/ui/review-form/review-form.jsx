@@ -5,6 +5,7 @@ import { useState } from 'react';
 const ReviewForm = ({review_id, teacher_id, user_id, onAddReview, parent_id}) => {
     const reviewService = new ReviewService();
     const [content, setContent] = useState("");
+    const [rating, setRating] = useState(5);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -13,7 +14,8 @@ const ReviewForm = ({review_id, teacher_id, user_id, onAddReview, parent_id}) =>
                 teacher_id,
                 review_id,
                 user_id,
-                content
+                content,
+                rating: parent_id ? undefined : rating // Only include rating for new reviews, not replies
             };
             if (parent_id) reviewData.parent_id = parent_id;
             const response = await reviewService.createReview(reviewData);
@@ -23,21 +25,41 @@ const ReviewForm = ({review_id, teacher_id, user_id, onAddReview, parent_id}) =>
                 onAddReview(response);
             }
             setContent("");
+            setRating(5);
         } catch(error) {
             return error;
         }
     }
+
+    const renderStars = () => {
+        return Array(5).fill(0).map((_, index) => (
+            <span 
+                key={index} 
+                className={`star ${index < rating ? 'filled' : ''}`}
+                onClick={() => !parent_id && setRating(index + 1)}
+                style={{ cursor: parent_id ? 'default' : 'pointer' }}
+            >
+                ★
+            </span>
+        ));
+    };
     
     return(
-        <div className="review-form-wrapper">
+        <div className="comment-form-wrapper">
             <form onSubmit={handleSubmit}>
+                {!parent_id && (
+                    <div className="rating-input">
+                        {renderStars()}
+                        <span className="rating-number">{rating}/5</span>
+                    </div>
+                )}
                 <textarea 
-                    className='review-content-input' 
+                    className='comment-content-input' 
                     value={content} 
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="Напишіть ваш відгук..."
+                    placeholder={parent_id ? "Напишіть вашу відповідь..." : "Напишіть ваш відгук..."}
                 />
-                <button type="submit">Додати відгук</button>
+                <button type="submit">{parent_id ? "Відповісти" : "Додати відгук"}</button>
             </form>
         </div>
     );

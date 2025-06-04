@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserInfoBlock from '../user-info-block/user-info-block';
+import ActionPostBlock from '../action-post-block/action-post-block';
 import './review-block.css';
-import ReviewForm from '../review-form/review-form';
+import ReviewForm from '../review-form/review-form.jsx';
 import ReviewService from '../../../services/reviewService';
+import { FiMessageSquare, FiCornerDownRight } from 'react-icons/fi';
 
-const ReviewBlock = ({ user_id, content, date, review_id, teacher_id, current_user_id }) => {
+const ReviewBlock = ({ user_id, content, date, review_id, teacher_id, current_user_id, rating }) => {
     const [showReplyForm, setShowReplyForm] = useState(false);
     const [replies, setReplies] = useState([]);
     const [showReplies, setShowReplies] = useState(false);
+    const [hasReplies, setHasReplies] = useState(false);
     const reviewService = new ReviewService();
+
+    // Load initial reply count
+    useEffect(() => {
+        const checkReplies = async () => {
+            try {
+                const response = await reviewService.getRepliesByReviewId(review_id);
+                const repliesData = response.data || [];
+                setHasReplies(repliesData.length > 0);
+                if (showReplies) {
+                    setReplies(repliesData);
+                }
+            } catch (error) {
+                console.error('Error checking replies:', error);
+            }
+        };
+        
+        checkReplies();
+    }, [review_id]);
 
     const handleShowReplies = async () => {
         if (!showReplies) {
@@ -21,6 +42,8 @@ const ReviewBlock = ({ user_id, content, date, review_id, teacher_id, current_us
     const handleAddReply = (newReply) => {
         setReplies(prev => [newReply, ...prev]);
         setShowReplyForm(false);
+        setShowReplies(true);
+        setHasReplies(true);
     };
 
     const renderStars = (rating) => {
@@ -33,9 +56,9 @@ const ReviewBlock = ({ user_id, content, date, review_id, teacher_id, current_us
 
     return (
         <div>
-            <div className="review-block-wrapper">
+            <div className="comment-block-wrapper">
                 <UserInfoBlock id={user_id} postCreateDate={date} />
-                <div className="review-block-content">
+                <div className="comment-block-content">
                     <div className="review-rating">
                         {renderStars(rating)}
                         <span className="rating-number">{rating}/5</span>
@@ -44,25 +67,34 @@ const ReviewBlock = ({ user_id, content, date, review_id, teacher_id, current_us
                         {content}
                     </div>
                 </div>
-                <div className="review-actions">
-                    <button onClick={() => setShowReplyForm(!showReplyForm)}>
+                <div className="comment-actions">
+                    <button 
+                        className="comment-btn"
+                        onClick={() => setShowReplyForm(!showReplyForm)}
+                    >
+                        <FiCornerDownRight />
                         Відповісти
                     </button>
-                    {replies.length > 0 && (
-                        <button onClick={handleShowReplies}>
+                    {hasReplies && (
+                        <button 
+                            className="comment-btn"
+                            onClick={handleShowReplies}
+                        >
+                            <FiMessageSquare />
                             {showReplies ? 'Сховати відповіді' : 'Показати відповіді'}
                         </button>
                     )}
                 </div>
                 {showReplyForm && (
-                    <ReviewForm
-                        review_id={review_id}
-                        user_id={current_user_id}
+                    <ReviewForm 
+                        review_id={review_id} 
+                        user_id={current_user_id} 
                         teacher_id={teacher_id}
-                        onAddReview={handleAddReply}
+                        onAddReview={handleAddReply} 
                         parent_id={review_id}
                     />
                 )}
+                <ActionPostBlock comment_id={review_id} />
             </div>
             {showReplies && replies.length > 0 && (
                 <div className="replies-list">
@@ -75,6 +107,7 @@ const ReviewBlock = ({ user_id, content, date, review_id, teacher_id, current_us
                             review_id={reply.id}
                             teacher_id={teacher_id}
                             current_user_id={current_user_id}
+                            rating={reply.rating}
                         />
                     ))}
                 </div>

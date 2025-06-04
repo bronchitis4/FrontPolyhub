@@ -1,53 +1,79 @@
-.review-form-wrapper {
-    margin: 10px 0;
-}
-
-.review-form-wrapper form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.review-content-input {
+.comment-form-wrapper {
     width: 100%;
     min-height: 100px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     padding: 10px;
-    border: 1px solid #ddd;
-    resize: vertical;
+}
+
+.comment-form-wrapper form {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-form-wrapper form textarea:focus {
+    border: none;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-form-wrapper form textarea {
+    resize: none;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 10px;
     font-family: inherit;
 }
 
-.rating-selector {
+.comment-form-wrapper form button {
+    margin-top: 10px;
+    height: 40px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.comment-form-wrapper form button:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-1px);
+}
+
+.comment-form-wrapper form button:active {
+    background-color: #e9ecef;
+    transform: translateY(0);
+}
+
+.rating-input {
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+    padding: 10px 0;
 }
 
-.rating-selector label {
-    color: #666;
-}
-
-.rating-selector select {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: white;
-}
-
-.review-form-wrapper button {
-    padding: 8px 16px;
-    background-color: #0056b3;
-    color: white;
-    border: none;
+.rating-input .star {
+    color: #ddd;
+    font-size: 20px;
     cursor: pointer;
-    align-self: flex-start;
+    transition: color 0.2s ease;
 }
 
-.review-form-wrapper button:hover {
-    background-color: #004494;
+.rating-input .star.filled {
+    color: #ffc107;
 }
 
-.review-form-wrapper button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.rating-input .star:hover,
+.rating-input .star:hover ~ .star {
+    color: #ffc107;
+}
+
+.rating-number {
+    color: #666;
+    margin-left: 5px;
 } 
