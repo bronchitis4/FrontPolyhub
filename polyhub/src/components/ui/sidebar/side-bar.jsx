@@ -20,8 +20,9 @@ const Sidebar = ({ OnSetCategoryId, OnSetInstituteId }) => {
     };
 
     const institutes = [
-        { id: 2, name: "ІКНІ" },
-        { id: 3, name: "ІКТА" },
+        { id: 1, name: "ІКНІ" },
+        { id: 2, name: "ІКТА" },
+        {id: 3, name: "IБІС" },
     ];
 
     const menuItems = [

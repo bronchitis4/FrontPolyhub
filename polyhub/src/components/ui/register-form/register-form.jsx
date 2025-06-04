@@ -29,7 +29,7 @@ const RegisterForm = () => {
     
         try {
             const response = await authService.register(data);
-    
+            console.log("Response from registration:", response);
             if (response.statusCode === 200) {
                 console.log("Реєстрація пройшла успішно: " + response);
                 navigate('/verification', { state: { email } });

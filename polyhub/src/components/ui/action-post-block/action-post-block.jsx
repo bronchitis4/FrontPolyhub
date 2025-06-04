@@ -15,16 +15,14 @@ const ActionPostBlock = ({post_id, comment_id}) => {
     const user = JSON.parse(localStorage.getItem('User'));
     const user_id = user ? user.user_id : null;
 
-    // Завантаження початкових даних
     useEffect(() => {
         const fetchVotes = async () => {
             try {
-                // Отримуємо кількість лайків/дизлайків
                 const votesCount = await voteService.getVotesCount(post_id, comment_id);
                 console.log('Initial votes count:', votesCount);
                 if (votesCount.data) {
-                    setLikes(votesCount.data.likes || 0);
-                    setDislikes(votesCount.data.dislikes || 0);
+                    setLikes(votesCount.data[0] || 0);
+                    setDislikes(votesCount.data[1] || 0);
                 }
 
                 // Отримуємо голос користувача якщо він авторизований
@@ -32,7 +30,7 @@ const ActionPostBlock = ({post_id, comment_id}) => {
                     const userVote = await voteService.getUserVote(user_id, post_id, comment_id);
                     console.log('Initial user vote:', userVote);
                     if (userVote.data) {
-                        setUserAction(userVote.data.vote_type === 1 ? 'liked' : 'disliked');
+                        setUserAction(userVote.data === 1 ? 'liked' : 'disliked');
                     }
                 }
             } catch (error) {
@@ -57,17 +55,20 @@ const ActionPostBlock = ({post_id, comment_id}) => {
             // Якщо користувач натискає ту саму кнопку - видаляємо голос
             if ((isLike && currentAction === 'liked') || (!isLike && currentAction === 'disliked')) {
                 setUserAction(null);
-                setLikes(prev => isLike ? prev - 1 : prev);
-                setDislikes(prev => !isLike ? prev - 1 : prev);
+                //setLikes(prev => isLike ? prev - 1 : prev);
+                //setDislikes(prev => !isLike ? prev - 1 : prev);
+                setLikes(null);
+                console.log('Removing vote');
+                setDislikes(0);
             } 
             // Якщо користувач змінює свій голос
             else if (currentAction) {
                 setUserAction(isLike ? 'liked' : 'disliked');
                 if (isLike) {
                     setLikes(prev => prev + 1);
-                    setDislikes(prev => prev - 1);
+                    // setDislikes(prev => prev - 1);
                 } else {
-                    setLikes(prev => prev - 1);
+                    // setLikes(prev => prev - 1);
                     setDislikes(prev => prev + 1);
                 }
             }
@@ -93,14 +94,14 @@ const ActionPostBlock = ({post_id, comment_id}) => {
             const votesCount = await voteService.getVotesCount(post_id, comment_id);
             console.log('Updated votes count:', votesCount);
             if (votesCount.data) {
-                setLikes(votesCount.data.likes || 0);
-                setDislikes(votesCount.data.dislikes || 0);
+                setLikes(votesCount.data[0] || 0);
+                setDislikes(votesCount.data[1] || 0);
             }
 
             const userVote = await voteService.getUserVote(user_id, post_id, comment_id);
             console.log('Updated user vote:', userVote);
             if (userVote.data) {
-                setUserAction(userVote.data.vote_type === 1 ? 'liked' : 'disliked');
+                setUserAction(userVote.data === 1 ? 'liked' : 'disliked');
             } else {
                 setUserAction(null);
             }
@@ -109,8 +110,8 @@ const ActionPostBlock = ({post_id, comment_id}) => {
             // Повертаємо попередній стан у випадку помилки
             const votesCount = await voteService.getVotesCount(post_id, comment_id);
             if (votesCount.data) {
-                setLikes(votesCount.data.likes || 0);
-                setDislikes(votesCount.data.dislikes || 0);
+                setLikes(votesCount.data[0] || 0);
+                setDislikes(votesCount.data[1] || 0);
             }
         }
     };
@@ -120,14 +121,14 @@ const ActionPostBlock = ({post_id, comment_id}) => {
             <div className="action-buttons">
                 <button 
                     className={`action-btn ${userAction === 'liked' ? 'liked' : ''}`}
-                    onClick={() => handleAction(1)}
+                    onClick={() => handleAction("upvote")}
                 >
                     <i className="fas fa-thumbs-up"></i>
                     <span className="action-count">{likes}</span>
                 </button>
                 <button 
                     className={`action-btn ${userAction === 'disliked' ? 'disliked' : ''}`}
-                    onClick={() => handleAction(-1)}
+                    onClick={() => handleAction("downvote")}
                 >
                     <i className="fas fa-thumbs-down"></i>
                     <span className="action-count">{dislikes}</span>

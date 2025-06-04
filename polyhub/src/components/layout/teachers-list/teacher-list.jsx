@@ -76,7 +76,8 @@ const TeacherList = ({ institute_id, searchValue, onSearchChange }) => {
                 if(response.data.length < LIMIT)
                     setHasMore(false);
 
-                if (response) {
+                if (response.data) {
+                    console.log("Викладачі завантажені:", response.data);
                     setTeachers(response.data);
                     setOffset(state => state + LIMIT);
                 } else {

@@ -1,8 +1,8 @@
-import { fetchWithAuth } from './authFetch'; // змінити шлях за потребою
+import { fetchWithAuth } from './authFetch';
 
 class VoteService {
     apiUrl = 'https://polyhub-server.onrender.com';
-
+    //apiUrl = 'http://localhost:3000'; L
     async createVote(data) {
         try {
             const response = await fetchWithAuth(`${this.apiUrl}/votes/`, {
@@ -27,8 +27,8 @@ class VoteService {
     async getVotesCount(post_id, comment_id = null) {
         try {
             const url = comment_id 
-                ? `${this.apiUrl}/votes/count?comment_id=${comment_id}`
-                : `${this.apiUrl}/votes/count?post_id=${post_id}`;
+                ? `${this.apiUrl}/votes/${comment_id}/commentVotes`
+                : `${this.apiUrl}/votes/${post_id}/postVotes`;
                 
             const response = await fetchWithAuth(url);
             
@@ -43,19 +43,23 @@ class VoteService {
         }
     }
 
-    async getUserVote(user_id, post_id, comment_id = null) {
+    async getUserVote(user_id, post_id=null, comment_id = null) {
         try {
             const url = comment_id 
                 ? `${this.apiUrl}/votes/user?user_id=${user_id}&comment_id=${comment_id}`
                 : `${this.apiUrl}/votes/user?user_id=${user_id}&post_id=${post_id}`;
                 
+            console.log(post_id, comment_id, user_id);
+            console.log(url);
             const response = await fetchWithAuth(url);
             
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
 
-            return await response.json();
+            const data = await response.json();
+            console.log(data);
+            return data;
         } catch (error) {
             console.error('Error in getUserVote:', error);
             throw error;
