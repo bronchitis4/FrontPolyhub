@@ -109,14 +109,14 @@ const TeacherList = ({ institute_id, searchValue, onSearchChange }) => {
                 <div className="posts-list">
                     {searchResults.map((teacher) => (
                         <TeacherListItem
-                           key={teacher.id}
-                           id={teacher.id}
-                           fullName={teacher.full_name}
-                           imgUrl={teacher.image_url}
-                           institute={teacher.institute ? teacher.institute.name : ''}
-                           email={teacher.email}
-                           avarageRating={3}
-                           bio={teacher.bio}
+                            key={teacher.id}
+                            id={teacher.id}
+                            fullName={teacher.full_name}
+                            imgUrl={teacher.image_url}
+                            institute={teacher.institute ? teacher.institute.name : ''}
+                            email={teacher.email}
+                            avarageRating={teacher.average_rating || 0}
+                            bio={teacher.bio}
                         />
                     ))}
                 </div>
@@ -132,14 +132,14 @@ const TeacherList = ({ institute_id, searchValue, onSearchChange }) => {
                         <div className="posts-list">
                             {teachers.map((teacher) => (
                                 <TeacherListItem
-                                   key={teacher.id}
-                                   id={teacher.id}
-                                   fullName={teacher.full_name}
-                                   imgUrl={teacher.image_url}
-                                   institute={teacher.institute ? teacher.institute.name : ''}
-                                   email={teacher.email}
-                                   avarageRating={3}
-                                   bio={teacher.bio}
+                                    key={teacher.id}
+                                    id={teacher.id}
+                                    fullName={teacher.full_name}
+                                    imgUrl={teacher.image_url}
+                                    institute={teacher.institute ? teacher.institute.name : ''}
+                                    email={teacher.email}
+                                    avarageRating={teacher.average_rating || 0}
+                                    bio={teacher.bio}
                                 />
                             ))}
                         </div>

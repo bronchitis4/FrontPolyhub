@@ -1,15 +1,35 @@
 import UserInfoBlock from "../user-info-block/user-info-block"
 import ActionPostBlock from "../action-post-block/action-post-block"
 import './comment-block.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CommentForm from '../comment-form/comment-form.jsx';
 import CommentService from '../../../services/commentService';
+import { FiMessageSquare, FiCornerDownRight } from 'react-icons/fi';
 
 const CommentBlock = ({user_id, content, date, comment_id, post_id, current_user_id}) => {
     const [showReplyForm, setShowReplyForm] = useState(false);
     const [replies, setReplies] = useState([]);
     const [showReplies, setShowReplies] = useState(false);
+    const [hasReplies, setHasReplies] = useState(false);
     const commentService = new CommentService();
+
+    // Load initial reply count
+    useEffect(() => {
+        const checkReplies = async () => {
+            try {
+                const response = await commentService.getRepliesByCommentId(comment_id);
+                const repliesData = response.data || [];
+                setHasReplies(repliesData.length > 0);
+                if (showReplies) {
+                    setReplies(repliesData);
+                }
+            } catch (error) {
+                console.error('Error checking replies:', error);
+            }
+        };
+        
+        checkReplies();
+    }, [comment_id]);
 
     const handleShowReplies = async () => {
         if (!showReplies) {
@@ -22,6 +42,8 @@ const CommentBlock = ({user_id, content, date, comment_id, post_id, current_user
     const handleAddReply = (newReply) => {
         setReplies(prev => [newReply, ...prev]);
         setShowReplyForm(false);
+        setShowReplies(true);
+        setHasReplies(true);
     };
 
     return(
@@ -31,18 +53,35 @@ const CommentBlock = ({user_id, content, date, comment_id, post_id, current_user
                 <div className="comment-block-content">
                     {content}
                 </div>
-                <button onClick={() => setShowReplyForm(!showReplyForm)}>
-                    Відповісти
-                </button>
-                <button onClick={handleShowReplies}>
-                    {showReplies ? 'Сховати відповіді' : 'Показати відповіді'}
-                </button>
+                <div className="comment-actions">
+                    <button 
+                        className="comment-btn"
+                        onClick={() => setShowReplyForm(!showReplyForm)}
+                    >
+                        <FiCornerDownRight />
+                        Відповісти
+                    </button>
+                    {hasReplies && (
+                        <button 
+                            className="comment-btn"
+                            onClick={handleShowReplies}
+                        >
+                            <FiMessageSquare />
+                            {showReplies ? 'Сховати відповіді' : 'Показати відповіді'}
+                        </button>
+                    )}
+                </div>
                 {showReplyForm && (
-                    <CommentForm comment_id={comment_id} user_id={current_user_id} onAddComment={handleAddReply} parent_id={comment_id}/>
+                    <CommentForm 
+                        comment_id={comment_id} 
+                        user_id={current_user_id} 
+                        onAddComment={handleAddReply} 
+                        parent_id={comment_id}
+                    />
                 )}
             </div>
             {showReplies && replies.length > 0 && (
-                <div className="replies-list" style={{marginLeft: '30px'}}>
+                <div className="replies-list">
                     {replies.map(reply => (
                         <CommentBlock
                             key={reply.id}

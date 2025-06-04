@@ -1,42 +1,187 @@
 header {
     width: 100%;
-   
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
 }
 
+header.transparent {
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: none;
+}
+
+header.transparent .navbar {
+    color: white;
+}
+
+header.transparent .logo {
+    color: white;
+}
+
+header.transparent .btn-login,
+header.transparent .btn-signup,
+header.transparent .profile-button {
+    color: white;
+    border-color: white;
+}
 
 .navbar {
-      border: 1px solid #ccc;
-
-    width: 100%;
-    height: 60px;
-    background-color: white;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1); 
-    padding: 0 20px 0px 20px;
+    padding: 0 20px;
 }
-
 
 .logo {
     font-size: 24px;
-    font-weight: 900;
-    color: #333;
+    font-weight: bold;
+    color: #4a90e2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    letter-spacing: 1px;
 }
 
-.log-in {
+.logo:hover {
+    color: #357abd;
+}
+
+.auth-buttons {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 180px;
+    gap: 1rem;
 }
 
 .btn-login, .btn-signup {
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-login {
+    color: #007bff;
+    border: 2px solid #007bff;
+    background-color: transparent;
+}
+
+.btn-login:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-signup {
+    background-color: #007bff;
+    color: white;
+    border: 2px solid #007bff;
+}
+
+.btn-signup:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.user-profile {
+    position: relative;
+}
+
+.profile-button {
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-info:hover {
+    background-color: #e9ecef;
+}
+
+.profile-icon {
+    color: #007bff;
+    font-size: 1.2rem;
+}
+
+.user-name {
+    color: #333;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.profile-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    min-width: 150px;
+    z-index: 1000;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-menu button {
+    width: 100%;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    background: none;
+    color: #dc3545;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-menu button:hover {
+    background-color: #fff5f5;
 }

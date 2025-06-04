@@ -1,0 +1,45 @@
+.reviews-list-wrapper {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-list-wrapper h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.reviews-list {
+    margin-top: 20px;
+}
+
+.reviews-list h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.reviews-list p {
+    color: #666;
+    text-align: center;
+    padding: 20px;
+}
+
+.loading, .error, .no-reviews {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.error {
+    color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.loading {
+    color: #0056b3;
+    background-color: #e7f1ff;
+} 

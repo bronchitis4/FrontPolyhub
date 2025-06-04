@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PostService from '../../../services/postService';
 import './add-post.css'
 
 function AddPostForm() {
-  
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -19,7 +20,6 @@ function AddPostForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
  
-
     const formData = new FormData();
     formData.append('file', file);
     formData.append('title', title);
@@ -28,8 +28,12 @@ function AddPostForm() {
     try {
       const response = await postService.createPost(formData);
       console.log(response);
+      if (response && response.data) {
+        // Перенаправляємо на сторінку створеного поста
+        navigate(`/post/${response.data.id}`);
+      }
     } catch (error) {
-      console.error('Error fetching posts:', error)
+      console.error('Error creating post:', error)
     }
   };
 

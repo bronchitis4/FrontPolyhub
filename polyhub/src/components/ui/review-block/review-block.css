@@ -1,0 +1,66 @@
+.review-block-wrapper {
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.review-block-content {
+    margin: 15px 0;
+    color: #333;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.review-rating {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.star {
+    color: #ddd;
+    font-size: 20px;
+}
+
+.star.filled {
+    color: #ffc107;
+}
+
+.rating-number {
+    color: #666;
+    margin-left: 5px;
+}
+
+.review-text {
+    color: #333;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.review-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.review-actions button {
+    padding: 5px 10px;
+    background-color: transparent;
+    border: 1px solid #0056b3;
+    color: #0056b3;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.review-actions button:hover {
+    background-color: #e7f1ff;
+}
+
+.replies-list {
+    margin-left: 30px;
+    border-left: 2px solid #ddd;
+    padding-left: 15px;
+} 

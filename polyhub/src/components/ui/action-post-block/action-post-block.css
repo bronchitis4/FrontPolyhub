@@ -55,3 +55,48 @@
     justify-content: center;
     cursor: pointer;
 }
+
+.action-block {
+    padding: 12px;
+    border-top: 1px solid #eaeaea;
+    margin-top: 12px;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Контейнер для лайків/дизлайків */
+.action-buttons .action-btn {
+    position: relative;
+}
+
+/* Анімація для підрахунку */
+.action-count {
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover .action-count {
+    transform: translateY(-2px);
+}
+
+/* Додаткові стилі для кнопки коментарів */
+.action-buttons .btn-primary {
+    margin-left: auto;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .action-buttons {
+        gap: 12px;
+    }
+    
+    .action-buttons .btn-primary {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import './register-form.css';
 import { Link, useNavigate } from "react-router-dom";
 import AuthService from '../../../services/authService.js'
+import { FiUser, FiUsers, FiMail, FiLock, FiUserPlus } from 'react-icons/fi';
 
 const RegisterForm = () => {
     const [submit, setSubmit] = useState(false);
@@ -39,26 +40,78 @@ const RegisterForm = () => {
         } catch (error) {
             console.error('Error:', error);
             setError('Error: ' + error.message);
+            setSubmit(false);
         }
     };
 
     return(
         <form className="register-form" onSubmit={handleSubmit}>
             <h1>Реєстрація</h1>
-            <label htmlFor="firstName">Ім'я</label>
-            <input name="firstName" type="text" value={first_name} onChange={(e) => setFirstName(e.target.value)} placeholder="Ім'я"/>
             
-            <label htmlFor="surname">Прізвище</label>
-            <input name="surname" type="text" value={surname} onChange={(e) => setSurname(e.target.value)} placeholder="Прізвище"/>
+            <label htmlFor="firstName">
+                <FiUser className="input-icon" /> Ім'я
+            </label>
+            <div className="input-wrapper">
+                <input 
+                    name="firstName" 
+                    type="text" 
+                    value={first_name} 
+                    onChange={(e) => setFirstName(e.target.value)} 
+                    placeholder="Введіть ваше ім'я"
+                    required
+                />
+            </div>
             
-            <label htmlFor="email">Електронна пошта</label>
-            <input name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Пошта"/>
+            <label htmlFor="surname">
+                <FiUsers className="input-icon" /> Прізвище
+            </label>
+            <div className="input-wrapper">
+                <input 
+                    name="surname" 
+                    type="text" 
+                    value={surname} 
+                    onChange={(e) => setSurname(e.target.value)} 
+                    placeholder="Введіть ваше прізвище"
+                    required
+                />
+            </div>
             
-            <label htmlFor="password">Пароль</label>
-            <input name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Пароль"/>
-            <p>{error}</p>
-            <button type="submit" disabled={submit} style={submit ? {background: 'gray'} : {} }>Зареєструватися</button>
-            <Link to="/login">Увійти</Link>
+            <label htmlFor="email">
+                <FiMail className="input-icon" /> Електронна пошта
+            </label>
+            <div className="input-wrapper">
+                <input 
+                    name="email" 
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="Введіть вашу пошту"
+                    required
+                />
+            </div>
+            
+            <label htmlFor="password">
+                <FiLock className="input-icon" /> Пароль
+            </label>
+            <div className="input-wrapper">
+                <input 
+                    name="password" 
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    placeholder="Введіть ваш пароль"
+                    required
+                />
+            </div>
+
+            {error && <p className="error-message">{error}</p>}
+            
+            <button type="submit" disabled={submit}>
+                <FiUserPlus className="button-icon" />
+                {submit ? 'Реєстрація...' : 'Зареєструватися'}
+            </button>
+            
+            <Link to="/login">Вже маєте акаунт? Увійти</Link>
         </form>
     );
 }

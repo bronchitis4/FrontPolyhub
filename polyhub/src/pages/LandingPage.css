@@ -1,0 +1,225 @@
+.landing-page {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+                url('https://lpnu.ua/sites/default/files/styles/teaser/public/2023/5/8/news/23286/lpfasad.jpg?itok=c-pUkqGy');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero .subtitle {
+    font-size: 1.8rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.quick-access {
+    padding: 6rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.quick-access h2 {
+    text-align: center;
+    margin-bottom: 4rem;
+    color: #2d3748;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.categories-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 0 1rem;
+    flex-wrap: nowrap;
+}
+
+.category-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 350px;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.category-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.1);
+}
+
+.category-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.category-card p {
+    color: #718096;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.about-project {
+    background-color: #f8f9fa;
+    padding: 6rem 2rem;
+}
+
+.about-project h2 {
+    text-align: center;
+    margin-bottom: 4rem;
+    color: #2d3748;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-content > p {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #4a5568;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    line-height: 1.7;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    padding: 0 1rem;
+}
+
+.feature {
+    text-align: center;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.feature p {
+    color: #718096;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero .subtitle {
+        font-size: 1.4rem;
+    }
+
+    .quick-access,
+    .about-project {
+        padding: 4rem 1rem;
+    }
+
+    .categories-grid,
+    .features {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .category-card,
+    .feature {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .categories-grid {
+        flex-wrap: wrap;
+    }
+    
+    .category-card {
+        max-width: none;
+    }
+} 

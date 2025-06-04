@@ -1,28 +1,48 @@
-
 .posts-list-wrapper {
-    padding: 20px;
-    overflow-y: auto;
-    width: 100%;
-    height: calc(100vh - 60px);
+    width: calc(100% - 20px);
+    padding: 0;
+    margin: 80px 10px 0 10px;
+    min-height: calc(100vh - 80px);
+    position: relative;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.loading, .error {
+    margin-top: 20px;
+    text-align: center;
+}
 
-
-  .loading, .error {
-    margin-top: 50px;
-
-  }
-  
-  .posts-list-wrapper::-webkit-scrollbar {
-    display: none;               
-  }
-  
-  .posts-list {
+.posts-list {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    row-gap: 20px;
-    align-items: center;
-    padding: 20px;
-    border-radius: 8px;
-  }
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: stretch;
+    width: 100%;
+    padding: 0;
+}
+
+.no-posts {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 1.1em;
+}
+
+.posts-list-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.has-more-btn {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 1300px) {
+    .posts-list-wrapper {
+        width: calc(100% - 40px);
+        margin: 80px 20px 0 20px;
+    }
+}

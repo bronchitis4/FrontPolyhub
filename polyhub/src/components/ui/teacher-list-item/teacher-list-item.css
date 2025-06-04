@@ -1,61 +1,179 @@
-
-.teacher-list-item-wrapper {
+.teacher-list-item {
+    background: white;
+    border-radius: 8px;
     padding: 20px;
-    width: 100%;
-        background-color: #fff;
-        border: 1px solid #ccc;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.teacher-list-item-wrapper h1 {
+.teacher-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.teacher-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.teacher-content {
+    display: flex;
+    gap: 20px;
+}
+
+.teacher-image {
+    flex: 0 0 200px;
+}
+
+.teacher-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.teacher-info {
+    flex: 1;
+}
+
+.teacher-info p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.teacher-info strong {
+    color: #666;
+    margin-right: 0.5rem;
+}
+
+.teacher-list-item-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
     text-align: left;
-    margin-bottom: 10px;
-    margin-top: 0px;
+}
+
+.teacher-list-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+.teacher-list-item-content h1 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+    text-align: left;
 }
 
 .teacher-list-item-description {
     display: flex;
+    gap: 20px;
     text-align: left;
 }
 
-.teacher-list-item-active-review button {
-    width: 200px;
-    height: 50px;
-        background-color: #fff;
-        border: 1px solid #ccc;
+.teacher-avatar {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border: 1px solid #ccc;
 }
-
-.teacher-list-item-active-review button:active {
-    background-color: #fcf;
-}
-
-.teacher-list-item-info p:first-child {
-    margin: 0px;
-}
-
 
 .teacher-list-item-info {
-    margin-left: 10px;
-
+    flex: 1;
+    text-align: left;
 }
-.teacher-avatar {
-    height: 220px;
-    width: 150px;
 
-            border: 1px solid #ccc;
+.teacher-list-item-info p {
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+    text-align: left;
 }
+
 .teacher-list-item-active-block {
-    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.teacher-list-item-active-rating {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 5px;
 }
-.teacher-list-item-active-rating {
-    width: 20%;
-    display: flex;
-    justify-content: space-around;
-    align-items: end;
-}
+
 .teacher-list-item-active-rating img {
-    width: 40px;
-    
+    width: 20px;
+    height: 20px;
+}
+
+.teacher-list-item-active-rating span {
+    color: #666;
+    margin-left: 5px;
+}
+
+.teacher-list-item-active-review button {
+    padding: 8px 16px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.teacher-list-item-active-review button:hover {
+    background-color: #004494;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 5px;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: #333;
 }

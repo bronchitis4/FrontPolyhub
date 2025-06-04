@@ -1,11 +1,13 @@
-import './has-more-btn.css'
+import React from 'react';
+import '../../../styles/buttons.css';
 
 const HasMoreBtn = ({children, action}) => {
     return (
-            <button className='has-more-btn' onClick={action}>
-                {children}
-            </button>
-    )
+        <button className="btn btn-load-more" onClick={action}>
+            <i className="fas fa-sync-alt"></i>
+            {children}
+        </button>
+    );
 }
 
 export default HasMoreBtn;

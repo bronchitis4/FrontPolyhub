@@ -1,0 +1,29 @@
+.posts-list-wrapper {
+    text-align: left;
+}
+
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+}
+
+.loading, .error, .no-posts {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.error {
+    color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.loading {
+    color: #0056b3;
+    background-color: #e7f1ff;
+} 

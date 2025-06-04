@@ -11,64 +11,22 @@ body {
   
 
   .dropdown-btn {
-    display: flex !important;  
-    align-items: center !important;
-    justify-content: flex-start !important;
-    column-gap: 5px;
+    display: none;
   }
 
-  .dropdown-container button {
-    display: flex !important;  
-    align-items: center !important;
-    justify-content: flex-start !important;
-    column-gap: 5px;
-    
-    cursor: pointer;
+  .dropdown-container {
+    display: none;
   }
 
-  .dropdown-container button:active {
-    background-color: #fcfc;
+  .fa-caret-down {
+    display: none;
   }
-  .sidenav {
-    height: calc(100vh - 60px);
-    width: 100%;
-    z-index: 1;
-    left: 0;
-    border: 1px solid #ccc;
 
 
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-    overflow-x: hidden;
-    padding-top: 20px;
-    z-index: -1;
-  }
-  
-  .sidenav a, .dropdown-btn {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #000000;
-    display: block;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  .sidenav a:hover, .dropdown-btn:hover {
-    color: #000000;
-  }
   
   
   .active {
     color: rgba(255, 255, 255, 0.8);
-  }
-  
-  .dropdown-container {
-    display: none;
-    border: none;    
   }
   
   .dropdown-container button {
@@ -81,13 +39,141 @@ body {
     padding-left: 40px;
   }
 
-  .fa-caret-down {
-    float: right;
-    padding-right: 8px;
+  .dropdown-container button:active {
+    background-color: #fcfc;
   }
   
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+  }
+  
+  .dropdown-item {
+    margin-bottom: 15px;
+  }
+
+  .dropdown-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .dropdown-header:hover {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    transform: translateX(5px);
+  }
+
+  .dropdown-header img {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+  }
+
+  .dropdown-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #2d3748;
+  }
+
+  .dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    margin-left: 20px;
+    transition: max-height 0.3s ease-out;
+  }
+
+  .dropdown-content.open {
+    max-height: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .subtopic {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #4a5568;
+  }
+
+  .subtopic:hover {
+    background-color: #edf2f7;
+    transform: translateX(5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .subtopic img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .subtopic span {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  /* Анімація для іконки розгортання */
+  .dropdown-header::after {
+    content: '▼';
+    margin-left: auto;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+  }
+
+  .dropdown-item.open .dropdown-header::after {
+    transform: rotate(180deg);
+  }
+
+  /* Анімація при наведенні */
+  .dropdown-item:hover .dropdown-header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+
+
+  /* Стилі для скроллбару */
+  .dropdown-content.open::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dropdown-content.open::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 3px;
+  }
+
+  .dropdown-content.open::-webkit-scrollbar-thumb {
+    background-color: #4a90e2;
+    border-radius: 3px;
+  }
+  
+  .sidenav {
+    padding: 20px 0;
+    height: calc(100vh - 60px); /* Висота вікна мінус висота header */
+    overflow-y: auto;
+    margin-top: 60px; /* Відступ зверху рівний висоті header */
+  }
+
+  .sidenav a {
+    padding: 4px 8px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #000000;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
   }
   

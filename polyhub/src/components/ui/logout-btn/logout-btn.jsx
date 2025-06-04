@@ -1,25 +1,24 @@
-import AuthService from '../../../services/authService'
-import { useNavigate } from 'react-router-dom';
-import './logout-btn.css'
+import { useContext } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { FiLogOut } from 'react-icons/fi';
 
 const LogoutBtn = () => {
-    const authService = new AuthService();
+    const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleExit = async () => {
-        try {
-            const response = await authService.logout();
-            navigate('/login')
-            console.log("Вийшов");
-        }catch(error) {
-            console.log(error)
-        }
+    const handleLogout = () => {
+        localStorage.removeItem('User');
+        localStorage.removeItem('accessToken');
+        logout();
+        navigate('/');
     }
+
     return (
-        <button className="logout-btn" onClick={handleExit}>
-            Вийти
+        <button onClick={handleLogout}>
+            <FiLogOut /> Вийти
         </button>
-    )
+    );
 }
 
 export default LogoutBtn;

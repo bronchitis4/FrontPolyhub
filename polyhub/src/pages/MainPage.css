@@ -1,0 +1,154 @@
+.main-page {
+    display: flex;
+    min-height: 100vh;
+    padding-top: 60px; /* Відступ для header */
+    background-color: #f8f9fa;
+}
+
+.main-page-left {
+    width: 300px;
+    height: calc(100vh - 60px); /* Висота з урахуванням header */
+    background-color: white;
+    border-right: 1px solid #eaeaea;
+    position: fixed;
+    left: 0;
+    top: 60px; /* Фіксуємо під header */
+    overflow-y: auto;
+}
+
+.main-page-center {
+    flex: 1;
+    padding: 20px;
+    margin-left: 300px; /* Відступ для фіксованої бічної панелі */
+    margin-right: 100px;
+    padding-top: 20px; /* Відступ зверху */
+    min-height: calc(100vh - 60px); /* Мінімальна висота з урахуванням header */
+}
+
+.main-page-center > * {
+    max-width: 800px; /* Обмежуємо максимальну ширину контенту */
+    margin: 0 auto; /* Центруємо контент */
+}
+
+.main-page-right {
+    width: 100px;
+    padding: 20px;
+    position: fixed;
+    right: 0;
+    top: 60px; /* Фіксуємо під header */
+    height: calc(100vh - 60px); /* Висота з урахуванням header */
+}
+
+/* Стилі для списків постів та викладачів */
+.posts-list, .teachers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Відступ між постами/картками викладачів */
+    padding: 20px 0; /* Відступи зверху та знизу */
+}
+
+/* Адаптивність */
+@media (max-width: 1200px) {
+    .main-page-center {
+        margin-right: 0;
+        padding: 20px;
+    }
+
+    .main-page-right {
+        display: none; /* Приховуємо правий блок на менших екранах */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-page-center {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .main-page-left {
+        display: none; /* Приховуємо бічну панель на мобільних */
+    }
+}
+
+/* Стилі для кнопок */
+button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(100, 100);
+        opacity: 0;
+    }
+}
+
+/* Стилі для посилань */
+a {
+    position: relative;
+    text-decoration: none;
+    color: #4a90e2;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #357abd;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #4a90e2;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+} 

@@ -1,27 +1,28 @@
 import './verify-form.css';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from "react";
-import { useContext } from 'react';
+import { useState, useContext } from "react";
 import { AuthContext } from '../../../context/AuthContext';
+import { FiMail, FiKey, FiCheck } from 'react-icons/fi';
 
 const VerifyForm = () => {
-
     const location = useLocation();
     const { email } = location.state || {};
 
-    const [verificationClientCode, setCode] = useState();
+    const [verificationClientCode, setCode] = useState("");
     const [error, setError] = useState(null);
-    const {login} = useContext(AuthContext);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const { login } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const handleVer = async (e) => {
         e.preventDefault();
         setError(null);
+        setIsSubmitting(true);
+
         const data = {
             email,
             verificationClientCode
         }
-        console.log(JSON.stringify(data));
         
         try {
             const response = await fetch('https://polyhub-server.onrender.com/auth/ver', {
@@ -30,50 +31,66 @@ const VerifyForm = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
-            
             });
             const responseData = await response.json();
 
             if (responseData.statusCode === 400) {
                 setError(responseData.error);
-            }else{
-                console.log("Верифікація пройшла гуд: " + responseData);
-                console.log("accessToken: " + responseData.accessToken);
-                console.log("refreshToken: " + responseData.refreshToken);
-                console.log("Token: " + responseData.accessToken);
-
-                // localStorage.setItem('accessToken', responseData.accessToken); 
-                // localStorage.setItem('refreshToken', responseData.refreshToken); 
-
-                console.log(responseData.data);
+                setIsSubmitting(false);
+            } else {
                 localStorage.setItem('User', JSON.stringify(responseData.data));
                 const user = JSON.parse(localStorage.getItem('User'));
                 
                 localStorage.setItem("accessToken", user.accessToken);
                 login(responseData.data.role);
-                navigate('/posts');
+                navigate('/');
             }
-
-        }catch (error) {
+        } catch (error) {
             console.error('Error:', error);
             setError('Error: ' + error.error);
+            setIsSubmitting(false);
         }
     }
 
     return(
         <form className="verify-form" onSubmit={handleVer}>
             <h1>Верифікація</h1>
-            <label htmlFor="email">Електронна пошта</label>
-            <input name="email" type="email" value={email}  placeholder="Пошта" readOnly/>
             
-            <label htmlFor="code">Код верифікації</label>
-            <input name="code" value={verificationClientCode} onChange={(e) => setCode(e.target.value)}  type="text" placeholder="Код верифікації"/>
+            <label htmlFor="email">
+                <FiMail className="input-icon" /> Електронна пошта
+            </label>
+            <div className="input-wrapper">
+                <input 
+                    name="email" 
+                    type="email" 
+                    value={email} 
+                    placeholder="Ваша пошта" 
+                    readOnly
+                />
+            </div>
             
-            <button type="submit">Верифікувати</button>
-            <p>{error}</p>
+            <label htmlFor="code">
+                <FiKey className="input-icon" /> Код верифікації
+            </label>
+            <div className="input-wrapper">
+                <input 
+                    name="code" 
+                    value={verificationClientCode} 
+                    onChange={(e) => setCode(e.target.value)} 
+                    type="text" 
+                    placeholder="Введіть код верифікації"
+                    required
+                />
+            </div>
+
+            {error && <p className="error-message">{error}</p>}
+            
+            <button type="submit" disabled={isSubmitting}>
+                <FiCheck className="button-icon" />
+                {isSubmitting ? 'Верифікація...' : 'Верифікувати'}
+            </button>
         </form>
     )
-
 }
 
 export default VerifyForm;

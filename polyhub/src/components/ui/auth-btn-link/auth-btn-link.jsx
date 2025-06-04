@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import './auth-btn-link.css'
 
 const AuthBtnLink = () => {
     return (
-        <NavLink to="/register" className="auth-btn-link">
-            Авторизуватися
-        </NavLink>
+        <Link to="/login" className="auth-btn">
+            Увійти в акаунт
+        </Link>
     )
 }
 

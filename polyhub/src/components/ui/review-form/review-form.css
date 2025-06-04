@@ -1,0 +1,53 @@
+.review-form-wrapper {
+    margin: 10px 0;
+}
+
+.review-form-wrapper form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-content-input {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.rating-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rating-selector label {
+    color: #666;
+}
+
+.rating-selector select {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.review-form-wrapper button {
+    padding: 8px 16px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.review-form-wrapper button:hover {
+    background-color: #004494;
+}
+
+.review-form-wrapper button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+} 

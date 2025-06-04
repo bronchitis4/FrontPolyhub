@@ -1,5 +1,6 @@
 import './App.css'
 import MainPage from './pages/MainPage'
+import LandingPage from './pages/LandingPage'
 import Header from './components/layout/header/header.jsx'
 import SearchInput from './components/ui/search-input/search-input.jsx'
 import Sidebar from './components/ui/sidebar/side-bar.jsx'
@@ -40,6 +41,7 @@ function App() {
       <Router>
         <Header search={<SearchInput value={searchTeacherQuery} onChange={handleTeacherSearchChange} />} />
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route path='/register' element={<RegisterForm/>} />
           <Route path='/verification' element={<VerifyForm/>}/>
           <Route path='/login' element={<LoginForm/>}/>
@@ -58,7 +60,7 @@ function App() {
            <Route path='/teachers/add' element= 
               {<MainPage left={<Sidebar OnSetCategoryId={OnSetCategoryId} OnSetInstituteId={OnSetInstituteId}/>} center={<AddTeacherForm/>} />}
           />
-      </Routes>
+        </Routes>
       </Router>
     </AuthProvider>
   )
